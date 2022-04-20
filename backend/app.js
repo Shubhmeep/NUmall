@@ -1,12 +1,15 @@
 const express = require('express'); //calling the express library of the node
 const app = express(); //this app will call the func express that we just made
-
+const cors = require('cors');
 require('dotenv/config'); //use to get some specific values from the .env file we made.
+app.use(cors())
+app.options('*', cors())
 const api = process.env.API_URL; //processing the API_URL variable from the .env file
 const morgan = require('morgan');
 const productsRouter = require('./routers/products');
 const mongoose = require('mongoose')
-    //middleware
+
+//middleware
 app.use(express.json()); //bodyparser.json() is depreciated now.
 app.use(morgan('tiny'));
 
