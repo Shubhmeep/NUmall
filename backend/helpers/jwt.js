@@ -6,7 +6,7 @@ function authJwt() {
     return jwt({
         secret,
         algorithms : ['HS256'],
-        isRevoked: isRevoked
+        // isRevoked: isRevoked,
     }).unless({
         path: [
             {url: /\/api\/v1\/products(.*)/ , methods: ['GET', 'OPTIONS'] },
@@ -17,7 +17,7 @@ function authJwt() {
     })
 }
 
-async function isRevoked(req, payload, done) {
+const isRevoked  = async (req, payload, done) => {
     if(!payload.isAdmin) {
         done(null, true)
     }
