@@ -1,8 +1,8 @@
 const {User} = require('../models/user');
 const express = require('express');
-const bcrypt = require('bcryptjs');
 const router = express.Router();
-const jwt = require("jsonwebtoken");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 router.get(`/`, async (req, res) =>{
     const userList = await User.find().select('-passwordHash');
@@ -26,7 +26,7 @@ router.post('/', async (req,res)=>{
     let user = new User({
         name: req.body.name,
         email: req.body.email,
-        passwordHash: bcrypt.hashSync(req.body.password,10),
+        passwordHash: bcrypt.hashSync(req.body.password, 10),
         phone: req.body.phone,
         isAdmin: req.body.isAdmin,
         street: req.body.street,
@@ -101,6 +101,7 @@ router.post('/login', async (req,res) => {
     
 })
 
+
 router.post('/register', async (req,res)=>{
     let user = new User({
         name: req.body.name,
@@ -121,6 +122,7 @@ router.post('/register', async (req,res)=>{
 
     res.send(user);
 })
+
 
 router.delete('/:id', (req, res)=>{
     User.findByIdAndRemove(req.params.id).then(user =>{
@@ -145,4 +147,5 @@ router.get(`/get/count`, async (req, res) =>{
     });
 })
 
-module.exports = router;
+
+module.exports =router;
