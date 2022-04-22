@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const categorySchema = mongoose.Schema({
     name: {
@@ -8,9 +8,18 @@ const categorySchema = mongoose.Schema({
     icon: {
         type: String,
     },
-    color: {
+    color: { 
         type: String,
     }
+})
+
+
+categorySchema.virtual('id').get(function () {
+    return this._id.toHexString();
 });
 
-exports.Category = mongoose.model("Category", categorySchema);
+categorySchema.set('toJSON', {
+    virtuals: true,
+});
+
+exports.Category = mongoose.model('Category', categorySchema);
