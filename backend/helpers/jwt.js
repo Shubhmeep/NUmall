@@ -7,6 +7,7 @@ function authJwt() {
         secret,
         algorithms: ['HS256'],
         isRevoked: isRevoked
+
     }).unless({
         path: [
             { url: /\/public\/uploads(.*)/, methods: ['GET', 'OPTIONS'] },
@@ -29,3 +30,4 @@ async function isRevoked(req, payload, done) {
 }
 
 module.exports = authJwt;
+
